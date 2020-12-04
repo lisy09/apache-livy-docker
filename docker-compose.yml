@@ -1,0 +1,23 @@
+version: "3"
+networks:
+  default:
+    external:
+      name: hadoop-docker_default
+services: 
+  livy:
+    image: ${DOCKER_REPO}livy:${DOCKER_TAG}
+    container_name: livy
+    restart: always
+    environment:
+      - HADOOP_CONF_DIR=/etc/hadoop/
+    ports:
+      - ${LIVY_PORT_INTERNAL}:${LIVY_PORT_INTERNAL}
+    volumes: 
+      - ${PWD}/conf/livy.conf:${LIVY_CONF_DIR}/livy.conf
+      - ${PWD}/conf/log4j.properties:${LIVY_CONF_DIR}/log4j.properties
+      - ${PWD}/conf/spark-blacklist.conf:${LIVY_CONF_DIR}/spark-blacklist.conf
+      - ${PWD}/vendor/hadoop-docker/conf/:/etc/hadoop/
+      - livy_logs:/usr/local/livy/logs
+
+volumes:
+  livy_logs:
