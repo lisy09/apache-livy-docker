@@ -42,3 +42,7 @@ deploy-hadoop:
 .PHONY: undeploy-hadoop
 undeploy-hadoop:
 	cd ./vendor/hadoop-docker && make undeploy
+
+.PHONY: submit
+submit:
+	curl -X POST -H "Content-Type: application/json" -H "X-Requested-By: user" -d '{"file":"file:///root/livy-local-files/spark-examples.jar","className":"org.apache.spark.examples.JavaSparkPi"}' http://localhost:${LIVY_PORT_INTERNAL}/batches

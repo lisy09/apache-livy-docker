@@ -18,6 +18,7 @@ services:
       - ${PWD}/conf/spark-blacklist.conf:${LIVY_CONF_DIR}/spark-blacklist.conf
       - ${PWD}/vendor/hadoop-docker/conf/:/etc/hadoop/
       - livy_logs:/usr/local/livy/logs
+      - ${PWD}/spark-examples.jar:/root/livy-local-files/spark-examples.jar
 
 volumes:
   livy_logs:

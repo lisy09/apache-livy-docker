@@ -59,8 +59,22 @@ Or you can check `./Makefile` for more details.
 Modify livy configuration under `./conf/` first.
 Please refer to [official repo](https://github.com/apache/incubator-livy/blob/master/conf/livy.conf.template) to check how.
 
-To deploy 
+To deploy livy with Hadoop cluster
 
 ```bash
-make run
+make deploy
+```
+
+To undeploy
+```bash
+make undeploy
+```
+
+To submit a tested batch spark task through livy api:
+```bash
+curl -X POST -H "Content-Type: application/json" -H "X-Requested-By: user" -d '{"file":"file:///root/livy-local-files/spark-examples.jar","className":"org.apache.spark.examples.JavaSparkPi"}' http://localhost:8998/batches
+```
+or
+```
+make submit
 ```
